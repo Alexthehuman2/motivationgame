@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde83bb48720ac54286ce4de28fc6da6, type: 3}
+  m_Name: ObjectiveDataSO
+  m_EditorClassIdentifier: 
+  punish_objectives:
+  - 5 pushups
+  - Go shower after stream
+  - Gift a sub to a random viewer
+  - End stream
+  - I shave my beard
+  IRL_dailies:
+  - Laundry
+  - Refill Water Bottle
+  - Tidy an Object in the room
+  - Do Uni Work
+  - Go shopping

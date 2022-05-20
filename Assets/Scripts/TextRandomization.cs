@@ -5,6 +5,7 @@ using TMPro;
 
 public class TextRandomization : MonoBehaviour
 {
+    [SerializeField] private ScriptableObject objective_data;
     [SerializeField] private List<string> duties = new List<string>();
     //needs something the duties read from.
 
@@ -14,6 +15,12 @@ public class TextRandomization : MonoBehaviour
     {
         tm_text = this.gameObject.GetComponent<TMP_Text>();
         tm_text.text = duties[Random.Range(0, duties.Count)];
+        EventSingleton.Instance.text_event.AddListener(GetComponentInChildren<TextRandomization>().NewDuty);
+    }
+
+    private void OnDisable()
+    {
+        EventSingleton.Instance.text_event.RemoveListener(NewDuty);
     }
 
     public void NewDuty()
