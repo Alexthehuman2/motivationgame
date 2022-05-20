@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class EventSingleton : MonoBehaviour
 {
     public static EventSingleton Instance { get; private set; }
-    public UnityEvent text_event;
+    public Dictionary<string, KeyEvent> events = new Dictionary<string,KeyEvent>();
     // Start is called before the first frame update
     private void Awake()
     {

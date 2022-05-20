@@ -7,10 +7,13 @@ public class RandomizeText : MonoBehaviour
 {
     public void randomizeText()
     {
-        if (EventSingleton.Instance.text_event != null)
+        if (EventSingleton.Instance.events != null)
         {
-            EventSingleton.Instance.text_event.Invoke();
-            Debug.Log("Invoking");
+            KeyEvent get_event;
+            if (EventSingleton.Instance.events.TryGetValue("RandomizeText", out get_event))
+            {
+                get_event.Invoke("punishment");
+            }
         }
     }
 }
