@@ -17,4 +17,5 @@ public class ObjectiveData_SO : ScriptableObject
         objectives.Add("dailies", dailies);
     }
 
+    //SaveToFile
 }

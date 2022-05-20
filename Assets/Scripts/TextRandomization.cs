@@ -36,7 +36,6 @@ public class TextRandomization : MonoBehaviour
     public void NewDutyFromKey(string key)
     {
         List<string> objective_list;
-        Debug.Log("Invoked");
         if (objective_data.objectives.TryGetValue(key, out objective_list))
         {
             Debug.Log(objective_list.Count);
