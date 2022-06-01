@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
-
-public class KeyEvent : UnityEvent<string> { }
+public class KeyEvent : UnityEvent<ObjType> { }
+public class KeyStringEvent : UnityEvent<ObjType, string> { }
 public class TextEvents : MonoBehaviour
 {
     [SerializeField] private GameObject randomizedText;
+    [SerializeField] private GameObject randomizeButton;
+    [SerializeField] private GameObject addNewText;
+    [SerializeField] private GameObject saveButton;
 
-    private KeyEvent randomize_event = new KeyEvent();
-
+    [SerializeField] private string EventString = "Punishment 6";
     private void Start()
     {
         if (EventSingleton.Instance.events == null)
         {
             EventSingleton.Instance.events = new Dictionary<string, KeyEvent>();
         }
-        EventSingleton.Instance.events.Add("RandomizeText", randomize_event);
+        if (EventSingleton.Instance.KS_events == null)
+        {
+            EventSingleton.Instance.KS_events = new Dictionary<string, KeyStringEvent>();
+        }
+        EventSingleton.Instance.events.Add("RandomizeText", new KeyEvent());
+        EventSingleton.Instance.KS_events.Add("AddObjective", new KeyStringEvent());
         randomizedText.SetActive(true);
+        randomizeButton.SetActive(true);
+        addNewText.SetActive(true);
+        saveButton.SetActive(true);
     }
 }

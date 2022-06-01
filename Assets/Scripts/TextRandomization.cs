@@ -16,7 +16,7 @@ public class TextRandomization : MonoBehaviour
         objective_data.LoadData();
         tm_text = this.gameObject.GetComponent<TMP_Text>();
         List<string> _punishment;
-        if (objective_data.objectives.TryGetValue("punishment", out _punishment))
+        if (objective_data.objectives.TryGetValue(ObjType.PUNISHMENT, out _punishment))
         {
             tm_text.text = _punishment[Random.Range(0, _punishment.Count)];
         }
@@ -26,6 +26,14 @@ public class TextRandomization : MonoBehaviour
             Debug.Log("Listener Added");
             get_event.AddListener(NewDutyFromKey);
         }
+        KeyStringEvent get_KS_event;
+        if (EventSingleton.Instance.KS_events.TryGetValue("AddObjective", out get_KS_event))
+        {
+            Debug.Log("AddObjective Listener Added");
+            get_KS_event.AddListener(AddSingleDutyToListFromKey);
+        }
+
+
     }
 
     private void OnDisable()
@@ -33,19 +41,23 @@ public class TextRandomization : MonoBehaviour
         //EventSingleton.Instance.text_event.RemoveListener(NewDuty);
     }
 
-    public void NewDutyFromKey(string key)
+    public void NewDutyFromKey(ObjType key)
     {
         List<string> objective_list;
         if (objective_data.objectives.TryGetValue(key, out objective_list))
         {
-            Debug.Log(objective_list.Count);
             tm_text.text = objective_list[Random.Range(0, objective_list.Count)];
         }
     }
 
-    public void AddSingleDutyToListFromKey(string key,string new_duty)
+    public void AddSingleDutyToListFromKey(ObjType key,string new_duty)
     {
+        Debug.Log("Added a Duty to the List");
         //objective_data.punish_objectives.Add(new_duty);
+        if (objective_data.objectives.ContainsKey(key))
+        {
+            objective_data.objectives[key].Add(new_duty);
+        }
     }
 
     public void AddMultipleDutiesToListFromKey(string key, List<string> new_duties)
