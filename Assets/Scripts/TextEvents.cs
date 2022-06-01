@@ -12,8 +12,7 @@ public class TextEvents : MonoBehaviour
     [SerializeField] private GameObject randomizeButton;
     [SerializeField] private GameObject addNewText;
     [SerializeField] private GameObject saveButton;
-
-    [SerializeField] private string EventString = "Punishment 6";
+    [SerializeField] private GameObject loadButton;
     private void Start()
     {
         if (EventSingleton.Instance.events == null)
@@ -30,5 +29,6 @@ public class TextEvents : MonoBehaviour
         randomizeButton.SetActive(true);
         addNewText.SetActive(true);
         saveButton.SetActive(true);
+        loadButton.SetActive(true);
     }
 }

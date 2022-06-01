@@ -23,13 +23,13 @@ public class TextRandomization : MonoBehaviour
         KeyEvent get_event;
         if (EventSingleton.Instance.events.TryGetValue("RandomizeText", out get_event))
         {
-            Debug.Log("Listener Added");
+            //Debug.Log("Listener Added");
             get_event.AddListener(NewDutyFromKey);
         }
         KeyStringEvent get_KS_event;
         if (EventSingleton.Instance.KS_events.TryGetValue("AddObjective", out get_KS_event))
         {
-            Debug.Log("AddObjective Listener Added");
+            //Debug.Log("AddObjective Listener Added");
             get_KS_event.AddListener(AddSingleDutyToListFromKey);
         }
 
@@ -50,13 +50,13 @@ public class TextRandomization : MonoBehaviour
         }
     }
 
-    public void AddSingleDutyToListFromKey(ObjType key,string new_duty)
+    //Adds a single duty using an Objective Type as a Key.
+    public void AddSingleDutyToListFromKey(ObjType key,string new_duty) 
     {
         Debug.Log("Added a Duty to the List");
-        //objective_data.punish_objectives.Add(new_duty);
-        if (objective_data.objectives.ContainsKey(key))
+        if (objective_data.objectives.ContainsKey(key)) //Checks if Key is valid
         {
-            objective_data.objectives[key].Add(new_duty);
+            objective_data.objectives[key].Add(new_duty); //Adds a new duty using that Key.
         }
     }
 
@@ -68,6 +68,7 @@ public class TextRandomization : MonoBehaviour
         }
     }
 
+    //Deletes a single duty using an Objective Type as a Key.
     public bool TryDeleteDutyFromStringWithKey(string key, string duty_to_delete)
     {
         //return objective_data.punish_objectives.Remove(duty_to_delete);

@@ -19,16 +19,31 @@ public class ObjectiveData_SO : ScriptableObject
 
     public void LoadData()
     {
-        if (File.Exists(Application.persistentDataPath + "/data.txt"))
+        //Load in Data from Text
+        if (objectives == null)  //checks if the objectives are empty
+        {
+            objectives = new Dictionary<ObjType, List<string>>(); //Makes a new dictionary if it's empty
+        }
+        else
+        {
+            objectives.Clear(); //clears the objective in preparation for loading.
+        }
+
+        if (File.Exists(Application.persistentDataPath + "/data.txt")) //If file exists, Load data.
         {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(Application.persistentDataPath + "/data.txt", FileMode.Open);
+            objectives.Clear();
             objectives = (Dictionary<ObjType, List<string>>)bf.Deserialize(file);
+            file.Close();
         }
-            //Load in Data from Text
-        if (objectives == null) objectives = new Dictionary<ObjType, List<string>>();
-        objectives.Add(ObjType.PUNISHMENT, punish);
-        objectives.Add(ObjType.DAILIES, dailies);
+        else //Otherwise start with default value.
+        {
+            objectives.Clear();
+            objectives.Add(ObjType.PUNISHMENT, punish);
+            objectives.Add(ObjType.DAILIES, dailies);
+        }
+
     }
 
     public void SaveData()
