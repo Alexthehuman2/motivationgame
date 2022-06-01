@@ -13,6 +13,7 @@ public class TextEvents : MonoBehaviour
     [SerializeField] private GameObject addNewText;
     [SerializeField] private GameObject saveButton;
     [SerializeField] private GameObject loadButton;
+    [SerializeField] private GameObject deleteButton;
     private void Start()
     {
         if (EventSingleton.Instance.events == null)
@@ -25,10 +26,12 @@ public class TextEvents : MonoBehaviour
         }
         EventSingleton.Instance.events.Add("RandomizeText", new KeyEvent());
         EventSingleton.Instance.KS_events.Add("AddObjective", new KeyStringEvent());
+        EventSingleton.Instance.KS_events.Add("DeleteObjective", new KeyStringEvent());
         randomizedText.SetActive(true);
         randomizeButton.SetActive(true);
         addNewText.SetActive(true);
         saveButton.SetActive(true);
         loadButton.SetActive(true);
+        deleteButton.SetActive(true);
     }
 }

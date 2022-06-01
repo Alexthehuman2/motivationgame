@@ -8,7 +8,8 @@ public enum ObjType
 {
     PUNISHMENT,
     DAILIES,
-    STREAMIDEAS
+    STREAMIDEAS,
+    TOTALCOUNT
 }
 [CreateAssetMenu(fileName = "ObjectiveDataSO", menuName = "ScriptableObjects/SpawnObjectiveSO", order = 1)]
 public class ObjectiveData_SO : ScriptableObject

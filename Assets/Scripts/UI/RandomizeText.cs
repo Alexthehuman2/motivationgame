@@ -5,10 +5,6 @@ using UnityEngine.Events;
 
 public class RandomizeText : MonoBehaviour
 {
-    private void Awake()
-    {
-        this.gameObject.SetActive(false);
-    }
     public void randomizeText()
     {
         if (EventSingleton.Instance.events != null)

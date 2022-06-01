@@ -16,7 +16,7 @@ public class TextRandomization : MonoBehaviour
         objective_data.LoadData();
         tm_text = this.gameObject.GetComponent<TMP_Text>();
         List<string> _punishment;
-        if (objective_data.objectives.TryGetValue(ObjType.PUNISHMENT, out _punishment))
+        if (objective_data.objectives.TryGetValue(ObjType.PUNISHMENT, out _punishment)) //Randomly
         {
             tm_text.text = _punishment[Random.Range(0, _punishment.Count)];
         }
@@ -32,8 +32,11 @@ public class TextRandomization : MonoBehaviour
             //Debug.Log("AddObjective Listener Added");
             get_KS_event.AddListener(AddSingleDutyToListFromKey);
         }
-
-
+        if (EventSingleton.Instance.KS_events.TryGetValue("DeleteObjective", out get_KS_event))
+        {
+            Debug.Log("Delete Objective Listener Added");
+            get_KS_event.AddListener(TryDeleteDutyFromStringWithKey);
+        }
     }
 
     private void OnDisable()
@@ -69,10 +72,11 @@ public class TextRandomization : MonoBehaviour
     }
 
     //Deletes a single duty using an Objective Type as a Key.
-    public bool TryDeleteDutyFromStringWithKey(string key, string duty_to_delete)
+    public void TryDeleteDutyFromStringWithKey(ObjType key, string duty_to_delete)
     {
         //return objective_data.punish_objectives.Remove(duty_to_delete);
-        return false;
+        Debug.Log("Deleted a Duty from the List");
+
     }
 
     public bool TryDeleteDutyFromGameObjectWithKey(string key, GameObject obj_to_delete)
