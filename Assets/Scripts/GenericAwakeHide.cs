@@ -8,4 +8,9 @@ public class GenericAwakeHide : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
+
+    public void _Active(bool tf)
+    {
+        this.gameObject.SetActive(tf);
+    }
 }
