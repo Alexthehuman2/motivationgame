@@ -10,6 +10,8 @@ public class TextRandomization : MonoBehaviour
     //needs something the duties read from.
 
     private TMP_Text tm_text;
+    private KeyEvent get_event;
+    private KeyStringEvent get_KS_event;
 
     private void OnEnable()
     {
@@ -20,13 +22,11 @@ public class TextRandomization : MonoBehaviour
         {
             tm_text.text = _punishment[Random.Range(0, _punishment.Count)];
         }
-        KeyEvent get_event;
         if (EventSingleton.Instance.events.TryGetValue("RandomizeText", out get_event))
         {
             //Debug.Log("Listener Added");
             get_event.AddListener(NewDutyFromKey);
         }
-        KeyStringEvent get_KS_event;
         if (EventSingleton.Instance.KS_events.TryGetValue("AddObjective", out get_KS_event))
         {
             //Debug.Log("AddObjective Listener Added");
@@ -41,7 +41,8 @@ public class TextRandomization : MonoBehaviour
 
     private void OnDisable()
     {
-        //EventSingleton.Instance.text_event.RemoveListener(NewDuty);
+        get_event.RemoveAllListeners();
+        get_KS_event.RemoveAllListeners();
     }
 
     public void NewDutyFromKey(ObjType key)
@@ -74,9 +75,7 @@ public class TextRandomization : MonoBehaviour
     //Deletes a single duty using an Objective Type as a Key.
     public void TryDeleteDutyFromStringWithKey(ObjType key, string duty_to_delete)
     {
-        //return objective_data.punish_objectives.Remove(duty_to_delete);
-        Debug.Log("Deleted a Duty from the List");
-
+        objective_data.removeDutyFromKey(key, duty_to_delete);
     }
 
     public bool TryDeleteDutyFromGameObjectWithKey(string key, GameObject obj_to_delete)

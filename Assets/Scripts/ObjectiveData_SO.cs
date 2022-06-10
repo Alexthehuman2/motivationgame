@@ -63,5 +63,15 @@ public class ObjectiveData_SO : ScriptableObject
         file.Close();
     }
 
-    //SaveToFile
+    public void removeDutyFromKey(ObjType type, string string_to_delete)
+    {
+        if (!objectives[type].Remove(string_to_delete))
+        {
+            Debug.Log("There is no '" + string_to_delete + "' in the objective list you've specified.");
+        }
+        else
+        {
+            objectives[type].TrimExcess();
+        }
+    }
 }

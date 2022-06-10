@@ -4,17 +4,26 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
+
 public class KeyDropDown : MonoBehaviour
 {
     [SerializeField] private GameObject deleteInputField;
     private TMP_Dropdown dropdown;
+
+    private void Awake()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     private void OnEnable()
     {
 
         dropdown = this.GetComponent<TMP_Dropdown>();
 
         dropdown.ClearOptions();
+
         List<string> options = new List<string>();
+        options.Add("...");
         for (int i = 0; i < (int)ObjType.TOTALCOUNT; i++)
         {
             ObjType getInt = (ObjType)i;
@@ -23,16 +32,14 @@ public class KeyDropDown : MonoBehaviour
         }
 
         dropdown.AddOptions(options);
-        BaseEventData event_data = new BaseEventData(EventSystem.current);
-        dropdown.OnSubmit(event_data);
     }
 
     public void testFunction()
     {
-/*        deleteInputField.SetActive(true);
-        ObjType val = (ObjType)System.Enum.Parse(typeof(ObjType), dropdown.)
-        deleteInputField.GetComponent<DeleteObject>().setObjType()
-        this.gameObject.SetActive(false);*/
+        Debug.Log("Selected option is " + (dropdown.value-1));
+        deleteInputField.SetActive(true);
+        deleteInputField.GetComponent<NewObjective>().setObjType((ObjType)(dropdown.value-1));
+        this.gameObject.SetActive(false);
     }
 
 }

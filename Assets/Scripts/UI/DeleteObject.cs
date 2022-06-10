@@ -10,21 +10,23 @@ public class DeleteObject : MonoBehaviour
     //[SerializeField] private TMP_Text WarningText;
     [SerializeField] private ObjType type;
 
+
+    private void Awake()
+    {
+        this.gameObject.SetActive(false);
+    }
     public void CheckValue()
     {
-        if (type != null)
-        {
-            
-        }
-        //Before this, we need to check if text is valid for the invoke.
         if (EventSingleton.Instance.KS_events != null)
         {
             KeyStringEvent get_event;
-            if (EventSingleton.Instance.KS_events.TryGetValue("DeleteText", out get_event))
+            if (EventSingleton.Instance.KS_events.TryGetValue("DeleteObjective", out get_event))
             {
-                get_event.Invoke(ObjType.PUNISHMENT, GetComponent<TMP_InputField>().text);
+                get_event.Invoke(type, GetComponent<TMP_InputField>().text);
             }
         }
+        this.GetComponent<TMP_InputField>().text = "";
+        this.gameObject.SetActive(false);
     }
 
     public void setObjType(ObjType new_type)
